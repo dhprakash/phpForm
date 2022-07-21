@@ -473,3 +473,122 @@ echo "Email successfully sent.";
 </tr>
 </table>
 </form>
+--------------------------------------------------
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>How To Create PHP Contact Form Send Email With Validation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+
+    <?php if (isset($_POST) && !empty($_POST)) {
+     $error = 1;
+     $message = '';
+     $sucmsg = '';
+     if ($_POST['name'] = '') {
+         $error = 0;
+     }
+     $mail = $_POST['email'];
+     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+     }
+     if ($_POST['subject'] == ' ') {
+         $error = 0;
+     }
+     if ($_POST['message'] == ' ') {
+         $error = 0;
+     }
+     if ($error == 1) {
+         $name = $_POST['name'];
+         $headers = "From:$name <$mail>" . "\r\n";
+         $sbj = $_POST['subject'];
+         $msg = $_POST['message'];
+         if (mail("yourmail@gmail.com", "$sbj", $msg, $headers)) {
+             $sucmsg = "Thank you for Contact Us !!!";
+         }
+     }
+    } ?>
+
+    <!-- Contact Us Form PHP Section -->
+    <section class="contact-us"> 
+        <div class="success-msg">
+            <?php if(isset($message) && $message!=''){?>
+                <?=$message; ?>
+            <?php } ?>
+            <?php 
+             if(isset($sucmsg) && !empty($sucmsg)){
+                 echo $sucmsg;
+             } ?> 
+        </div>
+
+        <h1>Contact us</h1>                
+        <form action="" method="post">
+            <input type="text" name="name" required  class="form-control" id="name" placeholder="Your Name" />
+            <input type="email" class="form-control" required name="email" id="email" placeholder="Your Email" />
+            <input type="text" class="form-control" required name="subject" id="subject" placeholder="Subject" />
+            <textarea class="form-control" name="message" id="message"  required  placeholder="Type Message"></textarea>
+            <button type="submit">Contact Now</button>
+        </form>
+    </section>
+    <!-- End Contact Us Form PHP Section -->
+</body>
+</html>
+
+
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: arial;
+}
+.contact-us {
+    padding: 30px 20px;
+    background: #efefef;
+    max-width: 500px;
+    margin: 100px auto 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #bdbdbd;
+}
+.contact-us h1 {
+    color: #000000;
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+.contact-us input, .contact-us textarea {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.contact-us textarea {
+    max-width: 100%;
+    min-height: 180px;
+}
+.contact-us .success-msg {
+    background-color: #4CAF50;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+}
+.contact-us button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: #fff;
+    border-radius: 4px;
+    margin: 0 auto;
+    display: table;
+    cursor: pointer;
+}
